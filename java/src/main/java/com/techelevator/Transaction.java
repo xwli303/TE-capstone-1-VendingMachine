@@ -42,7 +42,7 @@ public class Transaction {
 		
 	}
 	
-	public void manageTransaction() {
+	public void manageTransaction(Inventory inventory) {
 		while (continueDeposit) {
 			getMoney();
 		
@@ -54,11 +54,11 @@ public class Transaction {
 			}
 		}
 			System.out.println("Current money is: " + currentMoney);
-			this.selectItem();
+			this.selectItem(inventory);
 	}
 	
-	public void selectItem () {
-		Inventory inventory = new Inventory();
+	public void selectItem (Inventory inventory) {
+		//Inventory inventory = new Inventory();
 		inventory.displayChoices();
 		System.out.println("Please input the slot number: ");
 		
@@ -67,7 +67,7 @@ public class Transaction {
 		
 		SnacksInSlot snack = inventory.getSnackInslot(slotNum);
 	
-			System.out.println( "got " + snack.getName() + "!");
+			System.out.println( "snack is: " + snack.getName());
 		}
 		
 	}
