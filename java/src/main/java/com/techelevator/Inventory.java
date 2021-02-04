@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Inventory {
@@ -17,7 +18,17 @@ public class Inventory {
 		
 	}
 	
+	public SnacksInSlot getSnackInslot( String key ) {
+		return snacksInMachine.get(key);
+	}
+	public void displayChoices(){
+		Set<String> keys = snacksInMachine.keySet();
+		for( String key: keys) {
+			String snackName = snacksInMachine.get(key).getName();
+			System.out.println(key + " " + snackName);
+		}
 	
+	}
 	public void fillInventory () {
 //		snacksInMachine.
 	
