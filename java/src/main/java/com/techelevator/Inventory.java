@@ -25,7 +25,8 @@ public class Inventory {
 		Set<String> keys = snacksInMachine.keySet();
 		for( String key: keys) {
 			String snackName = snacksInMachine.get(key).getName();
-			System.out.println(key + " " + snackName);
+			int snackPrice = snacksInMachine.get(key).getPrice();
+			System.out.println(key + " " + snackName + " " + snackPrice);
 		}
 	
 	}

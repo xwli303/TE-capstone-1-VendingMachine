@@ -13,17 +13,23 @@ public class VendingMachineCLI {
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
+	
+
 
 	public void run() {
 		Inventory inventory = new Inventory ();
 		inventory.fillInventory();
+		Transaction purchase = new Transaction();
+		
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-
+			//choice is the user's input of slot
+			
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				inventory.displayChoices();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+				//do transaction
+				purchase.manageTransaction();
 			}
 		}
 	}
