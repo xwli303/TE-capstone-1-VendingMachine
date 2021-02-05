@@ -13,11 +13,12 @@ public class Inventory {
 
 	Map <String, SnacksInSlot> snacksInMachine = new TreeMap <>();
 	
+	
 	public Inventory () {
 		
 	}
 	
-	public SnacksInSlot getSnackInslot( String key ) {
+	public SnacksInSlot getSnackInslot(String key ) {
 		return snacksInMachine.get(key);
 	}
 	public void displayChoices(){
@@ -54,6 +55,18 @@ public class Inventory {
 	} catch (FileNotFoundException e){
 		System.err.println(e.getMessage());
 		}
+	
 	}
+	
+	public boolean checkInventory(String key)  {
+		if (snacksInMachine.get(key).getNumberRemaining() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+
 }
  

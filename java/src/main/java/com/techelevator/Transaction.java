@@ -18,6 +18,7 @@ public class Transaction {
 		currentMoney -= cost;
 	}
 	
+	
 	public void getMoney(String userMoney) throws TransactionException {
 		//System.out.println("Please insert money in amounts of $1, $2, $5, or $10.");
 		//Scanner userInput = new Scanner (System.in);
@@ -42,7 +43,7 @@ public class Transaction {
 		}
 		
 	}
-	public int moreMoney(String amount) {
+	public int moreMoney(String amount) throws TransactionException {
 		//System.out.println("in more money");
 		System.out.println("Deposited " + amount);
 		int deposit = 0;
@@ -58,7 +59,10 @@ public class Transaction {
 		} else if (amount.equals("$10")) {
 			deposit = 1000;
 			currentMoney += deposit;
-		} 
+		} else {
+			throw new TransactionException ("Invalid input amount, please enter "
+					+ "in amounts of $1, $2, $5, or $10.");
+		}
 		
 		return currentMoney;
 	}
@@ -66,7 +70,7 @@ public class Transaction {
 	public void manageTransaction(Inventory inventory, String YorN) throws TransactionException {
 		boolean continueDeposit = true; 
 		while(continueDeposit) {
-			getMoney();
+//			getMoney();
 		
 		Scanner userInput = new Scanner (System.in);
 		
@@ -80,7 +84,6 @@ public class Transaction {
 	
 
 	public void selectItem (Inventory inventory) throws TransactionException {
-		//Inventory inventory = new Inventory();
 		inventory.displayChoices();
 		System.out.println("Please input the slot number: ");
 
@@ -99,25 +102,20 @@ public class Transaction {
 		System.out.println( "You got " + snack.getName());
 		}
 		
+	public boolean checkSufficientFund (SnacksInSlot snack) {
+		int snackPrice = snack.getPrice();
+		if (currentMoney - snackPrice >= 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	
 	
-	
-	//if item does not exist, return to menu and send error message.
-	
-	
-	//if item is sold out, return to menu and send error message
-	
-	//if in stock, print item type message, dispense, remaining qty - x, update balance
-	
-	//			if currentMoney > inventory.getPrice
+	}
 	
 	
-	
-	
-	//if currentMoney > inventory.getPrice
-
 	
 	
 
