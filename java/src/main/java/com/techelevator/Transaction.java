@@ -11,7 +11,12 @@ public class Transaction {
 	public Transaction () {
 		
 	}
-	
+	public int getCurrentMoney() {
+		return currentMoney;
+	}
+	public void subtractCostOfItem( int cost){
+		currentMoney -= cost;
+	}
 	
 	public void getMoney(String userMoney) throws TransactionException {
 		//System.out.println("Please insert money in amounts of $1, $2, $5, or $10.");

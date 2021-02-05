@@ -54,7 +54,35 @@ public class VendingMachineCLI {
 					}
 					else if (action.equals(PURCHASE_MENU_SELECT)) {
 						//select item
-						System.out.println("you chose to Select and item");
+						
+						inventory.displayChoices();
+						String selection;
+						int moneyLeft;
+						String type;
+						System.out.println("Which item would you like? A1, A2, etc.");
+						selection = userInput.nextLine();
+						SnacksInSlot selectedItem = inventory.getSnackInslot(selection);
+						System.out.println(selectedItem.getName());
+						System.out.println(selectedItem.getPrice());
+						//System.out.println("Is this correct?");
+						transaction.subtractCostOfItem(selectedItem.getPrice());
+						System.out.println("Money remaining: " + transaction.getCurrentMoney());
+						type = selectedItem.getType();
+						System.out.println(type);
+						if(type.equals("Chip")) {
+							System.out.println("Crunch! Crunch!, Yum");
+						}
+						if(type.equals("Candy")) {
+							System.out.println("Munch, Munch, Yum!");
+						}
+						if(type.equals("Drink")) {
+							System.out.println("Glub glub");
+						}
+						
+						
+						
+						
+						
 					}
 					else if (action.equals(PURCHASE_MENU_EXIT)) {
 						//exit purchase menu
