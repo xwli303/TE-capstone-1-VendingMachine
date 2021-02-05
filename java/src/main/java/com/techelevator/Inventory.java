@@ -21,12 +21,24 @@ public class Inventory {
 	public SnacksInSlot getSnackInslot(String key ) {
 		return snacksInMachine.get(key);
 	}
+	public void removeSnackFromSlot(String key) {
+		SnacksInSlot item = snacksInMachine.get(key);
+		int numberLeft = item.getNumberRemaining();
+		System.out.println("number left" + numberLeft);
+		numberLeft -= 1;
+		System.out.println("number left" + numberLeft);
+		item.setNumberRemaining(numberLeft);
+		//snacksInMachine.put(key, item);
+		}
+	
 	public void displayChoices(){
 		Set<String> keys = snacksInMachine.keySet();
 		for( String key: keys) {
 			String snackName = snacksInMachine.get(key).getName();
 			int snackPrice = snacksInMachine.get(key).getPrice();
-			System.out.println(key + " " + snackName + " " + snackPrice);
+			int numberRemaining = snacksInMachine.get(key).getNumberRemaining();
+			System.out.println(key + " " + snackName + " " + snackPrice + " "  + numberRemaining);
+			
 		}
 	
 	}

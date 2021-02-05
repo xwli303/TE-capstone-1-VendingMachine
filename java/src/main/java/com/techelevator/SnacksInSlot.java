@@ -33,8 +33,8 @@ public class SnacksInSlot {
 	public void setType (String type) {
 		this.type = type;
 	}
-	public void setNumberRemaining (int numberUsed) {
-		this.numberRemaining = numberRemaining - numberUsed;
+	public void setNumberRemaining (int numberRemaining) {
+		this.numberRemaining = numberRemaining;
 	}
 	
 	//getters

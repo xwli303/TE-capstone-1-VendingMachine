@@ -52,33 +52,7 @@ public class VendingMachineCLI {
 					else if (action.equals(PURCHASE_MENU_SELECT)) {
 						//select item
 						
-						inventory.displayChoices();
-						String selection;
-						int moneyLeft;
-						String type;
-						System.out.println("Which item would you like? A1, A2, etc.");
-						selection = userInput.nextLine();
-						SnacksInSlot selectedItem = inventory.getSnackInslot(selection);
-						System.out.println(selectedItem.getName());
-						System.out.println(selectedItem.getPrice());
-						//System.out.println("Is this correct?");
-						transaction.subtractCostOfItem(selectedItem.getPrice());
-						System.out.println("Money remaining: " + transaction.getCurrentMoney());
-						type = selectedItem.getType();
-						System.out.println(type);
-						if(type.equals("Chip")) {
-							System.out.println("Crunch Crunch, Yum!");
-						}
-						if(type.equals("Candy")) {
-							System.out.println("Munch Munch, Yum!");
-						}
-						if(type.equals("Drink")) {
-							System.out.println("Glug glug, Yum!");
-						}
-						if (type.equals("Gum")) {
-							System.out.println("Chew Chew, Yum!");
-						}
-						
+					System.out.println(transactionPrompt());
 						
 						
 						
@@ -121,7 +95,7 @@ public class VendingMachineCLI {
 		//if both are true, return selected item
 		//
 		inventory.displayChoices();
-		String selection;
+		String selection;   // this is the key
 		int moneyLeft;
 		String type;
 		System.out.println("Which item would you like? A1, A2, etc.");
@@ -129,7 +103,7 @@ public class VendingMachineCLI {
 		SnacksInSlot selectedItem = inventory.getSnackInslot(selection);
 		System.out.println(selectedItem.getName());
 		System.out.println(selectedItem.getPrice());
-		System.out.println("Is this correct?");
+		//System.out.println("Is this correct?");
 		
 		if (!inventory.checkInventory(selection)) {
 			return "SOLD OUT";
@@ -139,6 +113,7 @@ public class VendingMachineCLI {
 			return "INSUFFICIENT FUNDS";	
 			
 		} 
+		inventory.removeSnackFromSlot(selection);
 		
 		transaction.subtractCostOfItem(selectedItem.getPrice());
 		System.out.println("Money remaining: " + transaction.getCurrentMoney());
