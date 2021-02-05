@@ -12,16 +12,14 @@ public class VendingMachineCLI {
 	public Inventory inventory;
 	private Transaction purchase = new Transaction();
 
-	public VendingMachineCLI(Menu menu, Inventory inventory) {
+	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
-		this.inventory = inventory;
+		this.inventory = new Inventory();
 	}
 	
 
-
 	public void run() {
-		
-		
+		inventory.fillInventory();
 		
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
@@ -31,18 +29,20 @@ public class VendingMachineCLI {
 				inventory.displayChoices();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				//do transaction
-				purchase.manageTransaction(inventory);
+				try {
+					purchase.manageTransaction(inventory);
+				} catch (TransactionException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		
-		Inventory inventory = new Inventory();
-		inventory.fillInventory();
-		//System.out.println(tempName);
+
 		Menu menu = new Menu(System.in, System.out);
-		VendingMachineCLI cli = new VendingMachineCLI(menu, inventory);
+		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 		
 		

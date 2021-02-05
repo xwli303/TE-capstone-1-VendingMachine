@@ -8,17 +8,12 @@ public class Transaction {
 	Boolean continueDeposit = true; //keep deposit or not 
 
 	
-//	Scanner userInput = new Scanner(System.in);  //user's choice
-	
-//	String slotNum = userInput.toString();
-//	int snackPrice = inventory.snacksInMachine.get(slotNum).getPrice();
-	
 	public Transaction () {
 		
 	}
 	
 	
-	public void getMoney() {
+	public void getMoney() throws TransactionException {
 		System.out.println("Please insert money in amounts of $1, $2, $5, or $10.");
 		Scanner userInput = new Scanner (System.in);
 		String userMoney = userInput.nextLine();
@@ -36,13 +31,13 @@ public class Transaction {
 			deposit = 1000;
 			currentMoney += deposit;
 		} else {
-			System.out.println("Invalid input amount, please put in "
+			throw new TransactionException ("Invalid input amount, please put in "
 					+ "amounts of $1, $2, $5, or $10");
 		}
 		
 	}
 	
-	public void manageTransaction(Inventory inventory) {
+	public void manageTransaction(Inventory inventory) throws TransactionException {
 		while (continueDeposit) {
 			getMoney();
 		
@@ -57,17 +52,25 @@ public class Transaction {
 			this.selectItem(inventory);
 	}
 	
-	public void selectItem (Inventory inventory) {
+
+	public void selectItem (Inventory inventory) throws TransactionException {
 		//Inventory inventory = new Inventory();
 		inventory.displayChoices();
 		System.out.println("Please input the slot number: ");
-		
+
 		Scanner userInput = new Scanner (System.in);
 		String slotNum = userInput.nextLine();
 		
 		SnacksInSlot snack = inventory.getSnackInslot(slotNum);
-	
-			System.out.println( "snack is: " + snack.getName());
+		int snackPrice = inventory.snacksInMachine.get(slotNum).getPrice();
+		
+		if (currentMoney - snackPrice < 0) {
+			throw new TransactionException("Insufficient funds");
+		} 
+		
+		currentMoney -= snackPrice;
+		//print out new balance 
+		System.out.println( "You got " + snack.getName());
 		}
 		
 	}

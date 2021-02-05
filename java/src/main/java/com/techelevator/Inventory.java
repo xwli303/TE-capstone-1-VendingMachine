@@ -10,8 +10,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class Inventory {
-	
-//	List <SnacksInSlot> snacks = new ArrayList<>();
+
 	Map <String, SnacksInSlot> snacksInMachine = new TreeMap <>();
 	
 	public Inventory () {
