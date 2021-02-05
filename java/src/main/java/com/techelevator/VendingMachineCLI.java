@@ -18,7 +18,7 @@ public class VendingMachineCLI {
 	private Menu menu;
 	public Inventory inventory;
 	private Transaction transaction = new Transaction();
-	boolean loop = true;
+	boolean isMain = true;
 	boolean isSelect = true;
 	Scanner userInput = new Scanner (System.in);
 	
@@ -33,7 +33,9 @@ public class VendingMachineCLI {
 	public void run() {
 		inventory.fillInventory();
 		
-		while (loop) {
+		while (isMain) {
+			isSelect = true;  //reset Purchase Menu
+			
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
@@ -68,7 +70,7 @@ public class VendingMachineCLI {
 				
 			}
 			else if (choice.contentEquals(MAIN_MENU_OPTIONS_EXIT)) {
-				loop = false;
+				isMain = false;
 				System.out.println("bye bye");
 			}
 		}
@@ -82,7 +84,8 @@ public class VendingMachineCLI {
 		String amount = userInput.nextLine();
 		
 		try {
-			System.out.println("Money in machine: "  + transaction.moreMoney(amount));
+			double moneyOut = (double)transaction.moreMoney(amount)/100.0;
+			System.out.println("Money in machine: $" + moneyOut);
 		} catch (TransactionException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage() + "\n Money in machine: "  + transaction.getCurrentMoney() + ".");
@@ -97,7 +100,6 @@ public class VendingMachineCLI {
 	
 		inventory.displayChoices();
 		String selection;   // this is the key
-		int moneyLeft;
 		String type;
 		System.out.println("Which item would you like? A1, A2, etc.");
 		
@@ -112,7 +114,6 @@ public class VendingMachineCLI {
 		
 		System.out.println(selectedItem.getName());
 		System.out.println(selectedItem.getPrice());
-		//System.out.println("Is this correct?");
 
 		
 		if (!inventory.checkInventory(selection)) {
@@ -134,7 +135,6 @@ public class VendingMachineCLI {
 		transaction.subtractCostOfItem(selectedItem.getPrice());
 		System.out.println("Money remaining: " + transaction.getCurrentMoney());
 		type = selectedItem.getType();
-		System.out.println(type);
 		if(type.equals("Chip")) {
 			return "Crunch Crunch, Yum!";
 		}

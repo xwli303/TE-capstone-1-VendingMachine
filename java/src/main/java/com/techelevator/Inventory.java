@@ -24,11 +24,9 @@ public class Inventory {
 	public void removeSnackFromSlot(String key) {
 		SnacksInSlot item = snacksInMachine.get(key);
 		int numberLeft = item.getNumberRemaining();
-		System.out.println("number left" + numberLeft);
 		numberLeft -= 1;
-		System.out.println("number left" + numberLeft);
 		item.setNumberRemaining(numberLeft);
-		//snacksInMachine.put(key, item);
+		
 		}
 	
 	public void displayChoices(){

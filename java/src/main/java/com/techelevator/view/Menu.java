@@ -51,7 +51,9 @@ public class Menu {
 			int optionNum = i + 1;
 			out.println(optionNum + ") " + options[i]);
 		}
+		
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
+		
 		out.flush();
 	}
 	public void manageTransaction(){
