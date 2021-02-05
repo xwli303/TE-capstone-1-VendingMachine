@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Transaction {
 
 	private int currentMoney = 0;
-	Boolean continueDeposit = true; //keep deposit or not 
+	 //keep deposit or not 
 
 	
 	public Transaction () {
@@ -13,10 +13,11 @@ public class Transaction {
 	}
 	
 	
-	public void getMoney() throws TransactionException {
-		System.out.println("Please insert money in amounts of $1, $2, $5, or $10.");
-		Scanner userInput = new Scanner (System.in);
-		String userMoney = userInput.nextLine();
+	public void getMoney(String userMoney) throws TransactionException {
+		//System.out.println("Please insert money in amounts of $1, $2, $5, or $10.");
+		//Scanner userInput = new Scanner (System.in);
+		//String userMoney = userInput.nextLine();
+		//String userMoney = "$1";
 		int deposit = 0;
 		if (userMoney.equals("$1")) {
 			deposit = 100;
@@ -36,14 +37,34 @@ public class Transaction {
 		}
 		
 	}
+	public int moreMoney(String amount) {
+		//System.out.println("in more money");
+		System.out.println("Deposited " + amount);
+		int deposit = 0;
+		if (amount.equals("$1")) {
+			deposit = 100;
+			currentMoney += deposit;
+		} else if (amount.equals("$2")) {
+			deposit = 200;
+			currentMoney += deposit;
+		} else if (amount.equals("$5")) {
+			deposit = 500;
+			currentMoney += deposit;
+		} else if (amount.equals("$10")) {
+			deposit = 1000;
+			currentMoney += deposit;
+		} 
+		
+		return currentMoney;
+	}
 	
-	public void manageTransaction(Inventory inventory) throws TransactionException {
-		while (continueDeposit) {
+	public void manageTransaction(Inventory inventory, String YorN) throws TransactionException {
+		boolean continueDeposit = true; 
+		while(continueDeposit) {
 			getMoney();
 		
 		Scanner userInput = new Scanner (System.in);
-		System.out.println("Are you depositing more money? Y/N");	
-		String YorN = userInput.nextLine();
+		
 		if (YorN.equals("N") || YorN.equals("n")){
 			continueDeposit = false;
 			}

@@ -5,10 +5,14 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import com.techelevator.Inventory;
+import com.techelevator.TransactionException;
+
 public class Menu {
 
 	private PrintWriter out;
 	private Scanner in;
+	
 
 	public Menu(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output);
@@ -49,5 +53,27 @@ public class Menu {
 		}
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
+	}
+	public void manageTransaction(){
+		System.out.println("type something");
+		String userInput = in.nextLine();
+		out.println(userInput);
+		boolean continueDeposit = true; 
+		while(continueDeposit) {
+			//purchase.getMoney();
+		
+		System.out.println("more money y/n");
+		String moreInput = in.nextLine();
+		if(moreInput.equals("n")) {
+			continueDeposit = false;
+		}
+		}
+		
+	
+	}   // END of manageTransaction
+	public void depositMoney() {
+		System.out.println("What is your deposit?");
+		String depositInput = in.nextLine();
+		System.out.println("you deposited " + depositInput);
 	}
 }

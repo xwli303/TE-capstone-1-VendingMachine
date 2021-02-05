@@ -1,16 +1,25 @@
 package com.techelevator;
 
+import java.util.Scanner;
+
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
 
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
+	private static final String MAIN_MENU_OPTIONS_EXIT = "Exit";
+	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE,MAIN_MENU_OPTIONS_EXIT };
 
+	private static final String PURCHASE_MENU_DEPOSIT = "* Deposit money";
+	private static final String PURCHASE_MENU_SELECT = "* Select Item";
+	private static final String PURCHASE_MENU_EXIT = "* Exit";
+	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_DEPOSIT, PURCHASE_MENU_SELECT, PURCHASE_MENU_EXIT };
 	private Menu menu;
 	public Inventory inventory;
-	private Transaction purchase = new Transaction();
+	private Transaction transaction = new Transaction();
+	boolean loop = true;
+	boolean isSelect = true;
 
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -20,21 +29,43 @@ public class VendingMachineCLI {
 
 	public void run() {
 		inventory.fillInventory();
-		
-		while (true) {
+		Scanner userInput = new Scanner (System.in);
+		while (loop) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-			//choice is the user's input of slot
+			
 			
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				inventory.displayChoices();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				//do transaction
-				try {
-					purchase.manageTransaction(inventory);
-				} catch (TransactionException e) {
-					// TODO Auto-generated catch block
-					System.out.println(e.getMessage());
-				}
+				
+				// SELECT ITEMS MENU
+				while(isSelect) {
+					String action = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					
+					if(action.equals(PURCHASE_MENU_DEPOSIT)) {
+						//deposit money
+						int output;
+						System.out.println("You chose to Deposit Money");
+						System.out.println("How much? ( $1, $2, $5, $ 10 )");
+						String amount = userInput.nextLine();
+						
+						System.out.println("Money in machine: "  + transaction.moreMoney(amount));
+					
+					}
+					else if (action.equals(PURCHASE_MENU_SELECT)) {
+						//select item
+						System.out.println("you chose to Select and item");
+					}
+					else if (action.equals(PURCHASE_MENU_EXIT)) {
+						//exit purchase menu
+						isSelect = false;
+					}
+				}                     //END SELECT ITEMS MENU
+				
+			}
+			else if (choice.contentEquals(MAIN_MENU_OPTIONS_EXIT)) {
+				loop = false;
+				System.out.println("bye bye");
 			}
 		}
 	}
