@@ -52,16 +52,17 @@ public class VendingMachineCLI {
 					else if (action.equals(PURCHASE_MENU_SELECT)) {
 						//select item
 						
-					System.out.println(transactionPrompt());
-						
-						
-						
+						System.out.println(transactionPrompt());
+					
 						
 					}
 					else if (action.equals(PURCHASE_MENU_EXIT)) {
+					
+						System.out.println(changePrompt());
 						//exit purchase menu
 						isSelect = false;
-						//return change if any
+						
+						
 					}
 				}                     //END SELECT ITEMS MENU
 				
@@ -89,21 +90,30 @@ public class VendingMachineCLI {
 	
 	}
 	
-	public String transactionPrompt() {
+	public String transactionPrompt(){
 		//check inventory for availability, else return SOLD OUT
 		//if available then check if sufficient fund
 		//if both are true, return selected item
-		//
+	
 		inventory.displayChoices();
 		String selection;   // this is the key
 		int moneyLeft;
 		String type;
 		System.out.println("Which item would you like? A1, A2, etc.");
+		
+		//selecting product
 		selection = userInput.nextLine();
+
 		SnacksInSlot selectedItem = inventory.getSnackInslot(selection);
+		
+		if (selectedItem == null) {
+			return "INVALID SELECTION";
+		}
+		
 		System.out.println(selectedItem.getName());
 		System.out.println(selectedItem.getPrice());
 		//System.out.println("Is this correct?");
+
 		
 		if (!inventory.checkInventory(selection)) {
 			return "SOLD OUT";
@@ -113,7 +123,13 @@ public class VendingMachineCLI {
 			return "INSUFFICIENT FUNDS";	
 			
 		} 
+		
+		//customer receives snacks from machine
 		inventory.removeSnackFromSlot(selection);
+		
+		//write/records transaction to log file
+		
+		
 		
 		transaction.subtractCostOfItem(selectedItem.getPrice());
 		System.out.println("Money remaining: " + transaction.getCurrentMoney());
@@ -135,7 +151,14 @@ public class VendingMachineCLI {
 	
 	}
 	
-	
+	public String changePrompt () {
+		
+		int [] coins = transaction.returnChange();
+
+		
+		return "Your change is " + coins[0] + " quarters, " +
+				coins[1] + " dimes, and " + coins[2] + " nickels.";
+	}
 
 	public static void main(String[] args) {
 

@@ -1,19 +1,24 @@
 package com.techelevator;
 
+import java.sql.Array;
 import java.util.Scanner;
 
 public class Transaction {
 
 	private int currentMoney = 0;
 	 //keep deposit or not 
-
+	private static final int VALUE_OF_QUARTER = 25;
+	private static final int VALUE_OF_DIME = 10;
+	private static final int VALUE_OF_NICKEL = 5;
 	
 	public Transaction () {
 		
 	}
+	
 	public int getCurrentMoney() {
 		return currentMoney;
 	}
+	
 	public void subtractCostOfItem( int cost){
 		currentMoney -= cost;
 	}
@@ -109,6 +114,24 @@ public class Transaction {
 		} else {
 			return false;
 		}
+	}
+	
+	public int [] returnChange() {
+		int [] change = {0, 0, 0};
+		
+		int quarters = currentMoney / VALUE_OF_QUARTER;
+		currentMoney = currentMoney - quarters * VALUE_OF_QUARTER;
+		change [0] = quarters;
+		
+		int dimes = currentMoney / VALUE_OF_DIME;
+		currentMoney = currentMoney - dimes * VALUE_OF_DIME;
+		change [1] = dimes;
+		
+		int nickels = currentMoney / VALUE_OF_NICKEL;
+		currentMoney = currentMoney - nickels * VALUE_OF_NICKEL;
+		change [2] = nickels;
+		
+		return change;
 	}
 	
 	
