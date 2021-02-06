@@ -35,7 +35,8 @@ public class Inventory {
 			String snackName = snacksInMachine.get(key).getName();
 			int snackPrice = snacksInMachine.get(key).getPrice();
 			int numberRemaining = snacksInMachine.get(key).getNumberRemaining();
-			System.out.println(key + " " + snackName + " " + snackPrice + " "  + numberRemaining);
+			System.out.printf("%-5s %-18s %4s %3s %n", 
+					key,snackName,snackPrice,numberRemaining);
 			
 		}
 	

@@ -1,7 +1,11 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
+import com.techelevator.search.WordLocation;
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
@@ -21,7 +25,9 @@ public class VendingMachineCLI {
 	boolean isMain = true;
 	boolean isSelect = true;
 	Scanner userInput = new Scanner (System.in);
+	private Log purchaseLog = new Log();
 	
+	List<String> audit = new ArrayList<String>();
 	
 	
 	public VendingMachineCLI(Menu menu) {
@@ -82,6 +88,7 @@ public class VendingMachineCLI {
 		System.out.println("You chose to Deposit Money");
 		System.out.println("How much? ( $1, $2, $5, $ 10 )");
 		String amount = userInput.nextLine();
+		purchaseLog.log("FEED MONEY: " + amount + " " );
 		
 		try {
 			double moneyOut = (double)transaction.moreMoney(amount)/100.0;
@@ -129,7 +136,9 @@ public class VendingMachineCLI {
 		inventory.removeSnackFromSlot(selection);
 		
 		//write/records transaction to log file
+		purchaseLog.log(selectedItem.getName() + " " + selection);
 		
+	
 		
 		
 		transaction.subtractCostOfItem(selectedItem.getPrice());
@@ -158,7 +167,22 @@ public class VendingMachineCLI {
 		
 		return "Your change is " + coins[0] + " quarters, " +
 				coins[1] + " dimes, and " + coins[2] + " nickels.";
+		
+		
 	}
+	
+	
+	
+	
+//	private String auditToString() {
+//		StringBuilder indexedWordsString = new StringBuilder();
+//		for (String string : audit) {
+//			indexedWordsString.append(entry.getKey() + ":" + entry.getValue() + "\n");
+//		}
+//		return indexedWordsString.toString();
+//	}
+	
+	
 
 	public static void main(String[] args) {
 
