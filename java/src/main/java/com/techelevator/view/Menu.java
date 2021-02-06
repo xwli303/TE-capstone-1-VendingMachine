@@ -56,6 +56,7 @@ public class Menu {
 		
 		out.flush();
 	}
+	/*
 	public void manageTransaction(){
 		System.out.println("type something");
 		String userInput = in.nextLine();
@@ -72,10 +73,11 @@ public class Menu {
 		}
 		
 	
-	}   // END of manageTransaction
+	}  */ // END of manageTransaction
+	/*
 	public void depositMoney() {
 		System.out.println("What is your deposit?");
 		String depositInput = in.nextLine();
 		System.out.println("you deposited " + depositInput);
-	}
+	}*/
 }

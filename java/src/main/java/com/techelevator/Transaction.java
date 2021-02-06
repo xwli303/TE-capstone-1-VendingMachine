@@ -23,7 +23,7 @@ public class Transaction {
 	}
 
 	public int moreMoney(String amount) throws TransactionException {
-		System.out.println("Deposited " + amount);
+		//System.out.println("Deposited " + amount);
 		int deposit = 0;
 		if (amount.equals("$1")) {
 			deposit = 100;
@@ -60,7 +60,7 @@ public class Transaction {
 		} 
 		return value;
 	}
-	
+	/*
 	public void manageTransaction(Inventory inventory, String YorN) throws TransactionException {
 		boolean continueDeposit = true; 
 		while(continueDeposit) {
@@ -72,8 +72,8 @@ public class Transaction {
 		}
 				System.out.println("Current money is: " + currentMoney);
 				this.selectItem(inventory);
-	}
-
+	}*/
+/*
 	public void selectItem (Inventory inventory) throws TransactionException {
 		inventory.displayChoices();
 		System.out.println("Please input the slot number: ");
@@ -92,7 +92,7 @@ public class Transaction {
 		//print out new balance 
 		System.out.println("You got " + snack.getName());
 		}
-		
+		*/
 	public boolean checkSufficientFund (SnacksInSlot snack) {
 		int snackPrice = snack.getPrice();
 		if (currentMoney - snackPrice >= 0) {
