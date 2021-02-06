@@ -62,7 +62,7 @@ public class VendingMachineCLI {
 						//select item
 						
 						System.out.println(transactionPrompt());
-					
+						System.out.println("Money in machine: " + penniesToDollars(transaction.getCurrentMoney()));
 						
 					}
 					else if (action.equals(PURCHASE_MENU_EXIT)) {
@@ -88,19 +88,21 @@ public class VendingMachineCLI {
 		int output;
 		System.out.println("You chose to Deposit Money");
 		System.out.println("How much? ( $1, $2, $5, $10 )");
-		String amount = userInput.nextLine();
+		String amountDeposited = userInput.nextLine();
+		int deposit = transaction.valueOfInput(amountDeposited);
 			
 		try {
-			double money = (double)transaction.moreMoney(amount)/100.0;
+			int balance = transaction.moreMoney(amountDeposited);
+			String balanceString = penniesToDollars(balance);
 			
-			System.out.println("Money in machine: " + formatter.format(money));
+			System.out.println("Money in machine: " + balanceString);
 			
-			purchaseLog.log("FEED MONEY: " + formatter.format((double)transaction.valueOfInput(amount)/100.0) + 
-					" " + formatter.format(money));
+			purchaseLog.log("FEED MONEY: " + penniesToDollars(deposit) + 
+					" " + balanceString);
 			
 		} catch (TransactionException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage() + "\nMoney in machine: "  + formatter.format((double)transaction.getCurrentMoney()/100.0) + ".");
+			System.out.println(e.getMessage() + "\nMoney in machine: "  + penniesToDollars(transaction.getCurrentMoney()) + ".");
 		
 		}
 		
@@ -115,46 +117,61 @@ public class VendingMachineCLI {
 		
 		inventory.displayChoices();
 		String selection;   // this is the key
-		String type;
+		String type;		// type of snack
 		System.out.println("Which item would you like? A1, A2, etc.");
 		
 		//selecting product
 		selection = userInput.nextLine();
-
 		SnacksInSlot selectedItem = inventory.getSnackInslot(selection);
 		
 		if (selectedItem == null) {
 			return "INVALID SELECTION";
 		}
 		
+		// display snack choice and price
 		System.out.println(selectedItem.getName());
-		double price = (double)selectedItem.getPrice()/100.0;
-		System.out.println(formatter.format(price));
+		int price = selectedItem.getPrice();
+		System.out.println("!" + penniesToDollars(price));
 
-		
+		// check if snack available and enough money in machine
 		if (!inventory.checkInventory(selection)) {
 			return "SOLD OUT";
-		} 
-		
+			} 
 		if (!transaction.checkSufficientFund(selectedItem)) {
 			return "INSUFFICIENT FUNDS";	
-			
-		} 
+			} 
 		
 		//customer receives snacks from machine
 		inventory.removeSnackFromSlot(selection);
 		
-		double startingMoney = (double)transaction.getCurrentMoney()/100.0;
+		// handling transaction and logging transaction
+		int startingMoney = transaction.getCurrentMoney();
+		String stringStartingMoney = penniesToDollars(startingMoney);
+		
 		transaction.subtractCostOfItem(selectedItem.getPrice());
-		double money = (double)transaction.getCurrentMoney()/100.0;
+		int balance = transaction.getCurrentMoney();
+		String stringBalance = penniesToDollars(balance);
 		
-		purchaseLog.log(selectedItem.getName() + " " + selection + " " + formatter.format((double)startingMoney) +
-		" " + formatter.format((double) money));
+		purchaseLog.log(selectedItem.getName() + " " + selection + " " + stringStartingMoney +
+		" " + stringBalance);
 		
-		
-		
-		System.out.println("Money in machine: " + formatter.format(money));
+		// make snack sound
 		type = selectedItem.getType();
+		return (getSnackSound(type));
+		
+	}
+	
+	public String changePrompt () {
+		
+		int balance = transaction.getCurrentMoney();
+		purchaseLog.log("GIVE CHANGE: " + penniesToDollars(balance) + " 0.00" );
+		
+		int [] coins = transaction.returnChange();
+		
+		return "Your change is " + coins[0] + " quarters, " +
+				coins[1] + " dimes, and " + coins[2] + " nickels.";	
+	}
+	public String getSnackSound(String type) {
 		if(type.equals("Chip")) {
 			return "Crunch Crunch, Yum!";
 		}
@@ -170,21 +187,12 @@ public class VendingMachineCLI {
 		return "";
 	
 	}
-	
-	public String changePrompt () {
-		
-		double amountRemain = transaction.getCurrentMoney()/100;
-		purchaseLog.log("GIVE CHANGE: " + formatter.format((double)amountRemain) + " 0.00" );
-		
-		int [] coins = transaction.returnChange();
-		
-		return "Your change is " + coins[0] + " quarters, " +
-				coins[1] + " dimes, and " + coins[2] + " nickels.";
-		
-	
-		
+	public String penniesToDollars(int pennies) {
+		double doubleDollars = (double)pennies/100.0;
+		return formatter.format(doubleDollars);
 	}
-	
+		
+
 
 
 	public static void main(String[] args) {

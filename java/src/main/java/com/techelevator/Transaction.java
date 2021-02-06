@@ -26,27 +26,7 @@ public class Transaction {
 	}
 	
 	
-	public void getMoney(String userMoney) throws TransactionException {
-	
-		int deposit = 0;
-		if (userMoney.equals("$1")) {
-			deposit = 100;
-			currentMoney += deposit;
-		} else if (userMoney.equals("$2")) {
-			deposit = 200;
-			currentMoney += deposit;
-		} else if (userMoney.equals("$5")) {
-			deposit = 500;
-			currentMoney += deposit;
-		} else if (userMoney.equals("$10")) {
-			deposit = 1000;
-			currentMoney += deposit;
-		} else {
-			throw new TransactionException ("Invalid input amount, please put in "
-					+ "amounts of $1, $2, $5, or $10");
-		}
-		
-	}
+
 	public int moreMoney(String amount) throws TransactionException {
 		//System.out.println("in more money");
 		System.out.println("Deposited " + amount);
