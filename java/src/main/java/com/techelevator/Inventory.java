@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +36,12 @@ public class Inventory {
 			String snackName = snacksInMachine.get(key).getName();
 			int snackPrice = snacksInMachine.get(key).getPrice();
 			int numberRemaining = snacksInMachine.get(key).getNumberRemaining();
+			//format snackPrice to dollars
+			NumberFormat formatter = NumberFormat.getCurrencyInstance();
+			double money = (double)snackPrice/100.0;
+			String snackPriceString = formatter.format(money);
 			System.out.printf("%-5s %-18s %4s %3s %n", 
-					key,snackName,snackPrice,numberRemaining);
+					key,snackName,snackPriceString,numberRemaining);
 			
 		}
 	

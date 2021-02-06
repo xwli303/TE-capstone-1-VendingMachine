@@ -25,10 +25,7 @@ public class Transaction {
 	
 	
 	public void getMoney(String userMoney) throws TransactionException {
-		//System.out.println("Please insert money in amounts of $1, $2, $5, or $10.");
-		//Scanner userInput = new Scanner (System.in);
-		//String userMoney = userInput.nextLine();
-		//String userMoney = "$1";
+	
 		int deposit = 0;
 		if (userMoney.equals("$1")) {
 			deposit = 100;

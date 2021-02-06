@@ -1,11 +1,13 @@
 package com.techelevator;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.techelevator.search.WordLocation;
+//import com.techelevator.search.WordLocation;
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
@@ -85,17 +87,19 @@ public class VendingMachineCLI {
 	
 	public void depositPrompt() {
 		int output;
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 		System.out.println("You chose to Deposit Money");
 		System.out.println("How much? ( $1, $2, $5, $ 10 )");
 		String amount = userInput.nextLine();
 		purchaseLog.log("FEED MONEY: " + amount + " " );
 		
 		try {
-			double moneyOut = (double)transaction.moreMoney(amount)/100.0;
-			System.out.println("Money in machine: $" + moneyOut);
+			double money = (double)transaction.moreMoney(amount)/100.0;
+			
+			System.out.println("Money in machine: " + formatter.format(money));
 		} catch (TransactionException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage() + "\n Money in machine: "  + transaction.getCurrentMoney() + ".");
+			System.out.println(e.getMessage() + "\nMoney in machine: "  + formatter.format((double)transaction.getCurrentMoney()/100.0) + ".");
 		}
 	
 	}
@@ -104,7 +108,8 @@ public class VendingMachineCLI {
 		//check inventory for availability, else return SOLD OUT
 		//if available then check if sufficient fund
 		//if both are true, return selected item
-	
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		
 		inventory.displayChoices();
 		String selection;   // this is the key
 		String type;
@@ -120,7 +125,8 @@ public class VendingMachineCLI {
 		}
 		
 		System.out.println(selectedItem.getName());
-		System.out.println(selectedItem.getPrice());
+		double price = (double)selectedItem.getPrice()/100.0;
+		System.out.println(formatter.format(price));
 
 		
 		if (!inventory.checkInventory(selection)) {
@@ -142,7 +148,10 @@ public class VendingMachineCLI {
 		
 		
 		transaction.subtractCostOfItem(selectedItem.getPrice());
-		System.out.println("Money remaining: " + transaction.getCurrentMoney());
+		
+		double money = (double)transaction.getCurrentMoney()/100.0;
+		
+		System.out.println("Money in machine: " + formatter.format(money));
 		type = selectedItem.getType();
 		if(type.equals("Chip")) {
 			return "Crunch Crunch, Yum!";
@@ -173,15 +182,7 @@ public class VendingMachineCLI {
 	
 	
 	
-	
-//	private String auditToString() {
-//		StringBuilder indexedWordsString = new StringBuilder();
-//		for (String string : audit) {
-//			indexedWordsString.append(entry.getKey() + ":" + entry.getValue() + "\n");
-//		}
-//		return indexedWordsString.toString();
-//	}
-	
+
 	
 
 	public static void main(String[] args) {
