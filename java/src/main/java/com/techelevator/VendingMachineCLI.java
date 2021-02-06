@@ -28,8 +28,7 @@ public class VendingMachineCLI {
 	boolean isSelect = true;
 	Scanner userInput = new Scanner (System.in);
 	private Log purchaseLog = new Log();
-	
-	List<String> audit = new ArrayList<String>();
+	private NumberFormat formatter = NumberFormat.getCurrencyInstance();
 	
 	
 	public VendingMachineCLI(Menu menu) {
@@ -87,20 +86,24 @@ public class VendingMachineCLI {
 	
 	public void depositPrompt() {
 		int output;
-		NumberFormat formatter = NumberFormat.getCurrencyInstance();
 		System.out.println("You chose to Deposit Money");
-		System.out.println("How much? ( $1, $2, $5, $ 10 )");
+		System.out.println("How much? ( $1, $2, $5, $10 )");
 		String amount = userInput.nextLine();
-		purchaseLog.log("FEED MONEY: " + amount + " " );
-		
+			
 		try {
 			double money = (double)transaction.moreMoney(amount)/100.0;
 			
 			System.out.println("Money in machine: " + formatter.format(money));
+			
+			purchaseLog.log("FEED MONEY: " + formatter.format((double)transaction.valueOfInput(amount)/100.0) + 
+					" " + formatter.format(money));
+			
 		} catch (TransactionException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage() + "\nMoney in machine: "  + formatter.format((double)transaction.getCurrentMoney()/100.0) + ".");
+		
 		}
+		
 	
 	}
 	
@@ -141,15 +144,14 @@ public class VendingMachineCLI {
 		//customer receives snacks from machine
 		inventory.removeSnackFromSlot(selection);
 		
-		//write/records transaction to log file
-		purchaseLog.log(selectedItem.getName() + " " + selection);
-		
-	
-		
-		
+		double startingMoney = (double)transaction.getCurrentMoney()/100.0;
 		transaction.subtractCostOfItem(selectedItem.getPrice());
-		
 		double money = (double)transaction.getCurrentMoney()/100.0;
+		
+		purchaseLog.log(selectedItem.getName() + " " + selection + " " + formatter.format((double)startingMoney) +
+		" " + formatter.format((double) money));
+		
+		
 		
 		System.out.println("Money in machine: " + formatter.format(money));
 		type = selectedItem.getType();
@@ -171,19 +173,19 @@ public class VendingMachineCLI {
 	
 	public String changePrompt () {
 		
+		double amountRemain = transaction.getCurrentMoney()/100;
+		purchaseLog.log("GIVE CHANGE: " + formatter.format((double)amountRemain) + " 0.00" );
+		
 		int [] coins = transaction.returnChange();
-
 		
 		return "Your change is " + coins[0] + " quarters, " +
 				coins[1] + " dimes, and " + coins[2] + " nickels.";
 		
+	
 		
 	}
 	
-	
-	
 
-	
 
 	public static void main(String[] args) {
 

@@ -11,6 +11,8 @@ public class Transaction {
 	private static final int VALUE_OF_DIME = 10;
 	private static final int VALUE_OF_NICKEL = 5;
 	
+	
+	
 	public Transaction () {
 		
 	}
@@ -19,8 +21,8 @@ public class Transaction {
 		return currentMoney;
 	}
 	
-	public void subtractCostOfItem( int cost){
-		currentMoney -= cost;
+	public void subtractCostOfItem(int cost){
+		 currentMoney = currentMoney - cost;
 	}
 	
 	
@@ -67,6 +69,23 @@ public class Transaction {
 		}
 		
 		return currentMoney;
+	}
+	
+	
+	
+	public int valueOfInput (String amount) {
+		int value = 0;
+		if (amount.equals("$1")) {
+			value = 100;
+		} else if (amount.equals("$2")) {
+			value = 200;
+		} else if (amount.equals("$5")) {
+			value = 500;
+		} else if (amount.equals("$10")) {
+			value = 1000;
+		} 
+		
+		return value;
 	}
 	
 	public void manageTransaction(Inventory inventory, String YorN) throws TransactionException {

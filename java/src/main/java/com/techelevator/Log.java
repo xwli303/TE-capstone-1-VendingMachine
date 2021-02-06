@@ -31,7 +31,7 @@ public class Log {
 	
 	public static String getDateTimeString() {
 		LocalDateTime timestamp = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.a");
 		return timestamp.format(formatter);
 	}
 	
