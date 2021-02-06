@@ -6,12 +6,9 @@ import java.util.Scanner;
 public class Transaction {
 
 	private int currentMoney = 0;
-	 //keep deposit or not 
 	private static final int VALUE_OF_QUARTER = 25;
 	private static final int VALUE_OF_DIME = 10;
 	private static final int VALUE_OF_NICKEL = 5;
-	
-	
 	
 	public Transaction () {
 		
@@ -24,11 +21,8 @@ public class Transaction {
 	public void subtractCostOfItem(int cost){
 		 currentMoney = currentMoney - cost;
 	}
-	
-	
 
 	public int moreMoney(String amount) throws TransactionException {
-		//System.out.println("in more money");
 		System.out.println("Deposited " + amount);
 		int deposit = 0;
 		if (amount.equals("$1")) {
@@ -64,25 +58,21 @@ public class Transaction {
 		} else if (amount.equals("$10")) {
 			value = 1000;
 		} 
-		
 		return value;
 	}
 	
 	public void manageTransaction(Inventory inventory, String YorN) throws TransactionException {
 		boolean continueDeposit = true; 
 		while(continueDeposit) {
-//			getMoney();
-		
-		Scanner userInput = new Scanner (System.in);
-		
-		if (YorN.equals("N") || YorN.equals("n")){
-			continueDeposit = false;
-			}
+			Scanner userInput = new Scanner (System.in);
+			
+			if (YorN.equals("N") || YorN.equals("n")){
+				continueDeposit = false;
+				}
 		}
-			System.out.println("Current money is: " + currentMoney);
-			this.selectItem(inventory);
+				System.out.println("Current money is: " + currentMoney);
+				this.selectItem(inventory);
 	}
-	
 
 	public void selectItem (Inventory inventory) throws TransactionException {
 		inventory.displayChoices();
@@ -100,7 +90,7 @@ public class Transaction {
 		
 		currentMoney -= snackPrice;
 		//print out new balance 
-		System.out.println( "You got " + snack.getName());
+		System.out.println("You got " + snack.getName());
 		}
 		
 	public boolean checkSufficientFund (SnacksInSlot snack) {
@@ -130,11 +120,6 @@ public class Transaction {
 		return change;
 	}
 	
-	
-	
 	}
 	
 	
-	
-	
-

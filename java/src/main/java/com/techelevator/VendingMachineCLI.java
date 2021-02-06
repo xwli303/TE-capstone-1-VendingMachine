@@ -35,6 +35,9 @@ public class VendingMachineCLI {
 		this.menu = menu;
 		this.inventory = new Inventory();
 	}
+	public VendingMachineCLI() {
+		
+	}
 	
 
 	public void run() {
@@ -171,6 +174,7 @@ public class VendingMachineCLI {
 		return "Your change is " + coins[0] + " quarters, " +
 				coins[1] + " dimes, and " + coins[2] + " nickels.";	
 	}
+	
 	public String getSnackSound(String type) {
 		if(type.equals("Chip")) {
 			return "Crunch Crunch, Yum!";
