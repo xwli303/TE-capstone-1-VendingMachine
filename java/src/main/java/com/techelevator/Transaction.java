@@ -18,6 +18,7 @@ public class Transaction {
 		return currentMoney;
 	}
 	
+	
 	public void subtractCostOfItem(int cost){
 		 currentMoney = currentMoney - cost;
 	}
@@ -102,22 +103,39 @@ public class Transaction {
 		}
 	}
 	
-	public int [] returnChange() {
-		int [] change = {0, 0, 0};
+	String returnChange(int amount) {
+		int [] coins = {0, 0, 0};
 		
-		int quarters = currentMoney / VALUE_OF_QUARTER;
-		currentMoney = currentMoney - quarters * VALUE_OF_QUARTER;
-		change [0] = quarters;
+		int quarters = amount / VALUE_OF_QUARTER;
+		amount = amount - quarters * VALUE_OF_QUARTER;
+		coins [0] = quarters;
 		
-		int dimes = currentMoney / VALUE_OF_DIME;
-		currentMoney = currentMoney - dimes * VALUE_OF_DIME;
-		change [1] = dimes;
+		int dimes = amount / VALUE_OF_DIME;
+		amount = amount - dimes * VALUE_OF_DIME;
+		coins [1] = dimes;
 		
-		int nickels = currentMoney / VALUE_OF_NICKEL;
-		currentMoney = currentMoney - nickels * VALUE_OF_NICKEL;
-		change [2] = nickels;
+		int nickels = amount / VALUE_OF_NICKEL;
+		amount = amount - nickels * VALUE_OF_NICKEL;
+		coins [2] = nickels;
 		
-		return change;
+		String change = "Your change is:\r";
+		if(coins[0] > 0) {
+			if(coins[0] > 1) {
+			change = change + " " + coins[0] + " quarters\r";
+			}else { change = change + " " + coins[0] + " quarter\r";	
+			}
+		}
+		if(coins[1] > 0) {
+			if(coins[1] > 1) {
+			change = change + " " + coins[1] + " dimes\r";
+			}else { change = change + " " + coins[1] + " dime\r";}
+		}
+		if( coins[2] > 0) {
+			change = change + " " + coins[2] + " nickel\r";
+		}
+		currentMoney = 0;
+		return change;	
+		
 	}
 	
 	}

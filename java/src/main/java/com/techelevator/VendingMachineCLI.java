@@ -168,25 +168,8 @@ public class VendingMachineCLI {
 		
 		int balance = transaction.getCurrentMoney();
 		purchaseLog.log("GIVE CHANGE: " + penniesToDollars(balance) + " 0.00" );
-		
-		int [] coins = transaction.returnChange();
-		String change = "Your change is:\r";
-		if(coins[0] > 0) {
-			if(coins[0] > 1) {
-			change = change + " " + coins[0] + " quarters\r";
-			}else { change = change + " " + coins[0] + " quarter\r";	
-			}
-		}
-		if(coins[1] > 0) {
-			if(coins[1] > 1) {
-			change = change + " " + coins[1] + " dimes\r";
-			}else { change = change + " " + coins[1] + " dime\r";}
-		}
-		if( coins[2] > 0) {
-			change = change + " " + coins[2] + " nickel\r";
-		}
-		
-		return change;	
+
+		return transaction.returnChange(balance);	
 	}
 	
 	
