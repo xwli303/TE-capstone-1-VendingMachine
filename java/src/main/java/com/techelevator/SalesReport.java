@@ -15,7 +15,6 @@ import java.util.TreeMap;
 
 
 public class SalesReport {
-
 		
 //		Map <String, SnacksInSlot> snacks = new TreeMap<>();
 		
@@ -26,9 +25,13 @@ public class SalesReport {
 			
 			try {
 				File salesReport = new File("SalesReport.txt");
-				salesReport.createNewFile();
 				
+				if(!salesReport.exists()) {
+					System.out.println("file already exists");
+				}
+				salesReport.createNewFile();
 				boolean appendMode = salesReport.exists() ? true : false;
+				
 				
 				try (PrintWriter writer =
 					new PrintWriter (new FileOutputStream(salesReport.getAbsoluteFile(), appendMode))){
