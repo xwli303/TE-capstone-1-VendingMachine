@@ -20,10 +20,30 @@ public class TransactionTest {
 		int result = transaction.moreMoney("$10");
 		assertEquals(expected, result);
 	}
-	
+	@Test
+	public void testMoreMoney_insert5_shouldReturn_rightAmount() throws TransactionException {
+		Transaction transaction = new Transaction();
+		int expected = 500;
+		int result = transaction.moreMoney("$5");
+		assertEquals(expected, result);
+	}
+	@Test
+	public void testMoreMoney_insert2_shouldReturn_rightAmount() throws TransactionException {
+		Transaction transaction = new Transaction();
+		int expected = 200;
+		int result = transaction.moreMoney("$2");
+		assertEquals(expected, result);
+	}
+	@Test
+	public void testMoreMoney_insert1_shouldReturn_rightAmount() throws TransactionException {
+		Transaction transaction = new Transaction();
+		int expected = 100;
+		int result = transaction.moreMoney("$1");
+		assertEquals(expected, result);
+	}
 	public void testMoreMoney_insert4_shouldReturnException()  {
 		Transaction transaction = new Transaction();
-		int expected = 1000;
+		int expected = 0;
 		try { transaction.moreMoney("$4"); 
 		
 		} catch (TransactionException e) {	
@@ -107,6 +127,13 @@ public class TransactionTest {
 	
 //test value of input
 	@Test
+	public void testValueOfInput_TenDollars_shouldReturn1000() {
+		Transaction transaction = new Transaction();
+		int expected = 1000;
+		int result = transaction.valueOfInput("$10");
+		assertEquals(expected,result);
+	}
+	@Test
 	public void testValueOfInput_FiveDollars_shouldReturn500() {
 		Transaction transaction = new Transaction();
 		int expected = 500;
@@ -119,6 +146,13 @@ public class TransactionTest {
 		Transaction transaction = new Transaction();
 		int expected = 200;
 		int result = transaction.valueOfInput("$2");
+		assertEquals(expected,result);
+	}
+	@Test
+	public void testValueOfInput_oneDollars_shouldReturn100() {
+		Transaction transaction = new Transaction();
+		int expected = 100;
+		int result = transaction.valueOfInput("$1");
 		assertEquals(expected,result);
 	}
 	

@@ -136,7 +136,7 @@ public class VendingMachineCLI {
 		if (selectedItem == null) {
 			return "INVALID SELECTION";
 		}
-		
+	 
 		// display snack choice and price
 		System.out.println(selectedItem.getName());
 		int price = selectedItem.getPrice();

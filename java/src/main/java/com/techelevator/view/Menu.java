@@ -39,7 +39,7 @@ public class Menu {
 		} catch (NumberFormatException e) {
 			// eat the exception, an error message will be displayed below since choice will be null
 		}
-		if (choice == null) {
+	if (choice == null) {
 			out.println(System.lineSeparator() + "*** " + userInput + " is not a valid option ***" + System.lineSeparator());
 		}
 		return choice;
@@ -47,7 +47,12 @@ public class Menu {
 
 	private void displayMenuOptions(Object[] options) {
 		out.println();
-		for (int i = 0; i < options.length; i++) {
+	//	int hiddenLength  = options.length;
+	//	if (hiddenLength > 3) {
+	//		hiddenLength = 3;
+	//		}
+		//for(int i = 0; i <options.length; i++)
+		for (int i = 0; i < 3; i++) {
 			int optionNum = i + 1;
 			out.println(optionNum + ") " + options[i]);
 		}
@@ -56,28 +61,5 @@ public class Menu {
 		
 		out.flush();
 	}
-	/*
-	public void manageTransaction(){
-		System.out.println("type something");
-		String userInput = in.nextLine();
-		out.println(userInput);
-		boolean continueDeposit = true; 
-		while(continueDeposit) {
-			//purchase.getMoney();
-		
-		System.out.println("more money y/n");
-		String moreInput = in.nextLine();
-		if(moreInput.equals("n")) {
-			continueDeposit = false;
-		}
-		}
-		
 	
-	}  */ // END of manageTransaction
-	/*
-	public void depositMoney() {
-		System.out.println("What is your deposit?");
-		String depositInput = in.nextLine();
-		System.out.println("you deposited " + depositInput);
-	}*/
 }

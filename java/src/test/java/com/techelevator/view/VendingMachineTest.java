@@ -27,7 +27,22 @@ public class VendingMachineTest {
 		String result = vendingMachine.getSnackSound("Chip");
 		assertEquals(expected, result);
 	}
-	
+	@Test
+	public void testGetSound_withCandy_shouldReturnCandySound() {
+		VendingMachineCLI vendingMachine = new VendingMachineCLI();
+		
+		String expected = "Munch Munch, Yum!";
+		String result = vendingMachine.getSnackSound("Candy");
+		assertEquals(expected, result);
+	}
+	@Test
+	public void testGetSound_withGum_shouldReturnGumSound() {
+		VendingMachineCLI vendingMachine = new VendingMachineCLI();
+		
+		String expected = "Chew Chew, Yum!";
+		String result = vendingMachine.getSnackSound("Gum");
+		assertEquals(expected, result);
+	}
 	@Test
 	public void testGetSound_withEmpty_shouldReturnEmpty() {
 		VendingMachineCLI vendingMachine = new VendingMachineCLI();
