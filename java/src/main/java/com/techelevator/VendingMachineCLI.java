@@ -29,7 +29,7 @@ public class VendingMachineCLI {
 	Scanner userInput = new Scanner (System.in);
 	private Log purchaseLog = new Log();
 	private NumberFormat formatter = NumberFormat.getCurrencyInstance();
-	
+	private SalesReport salesReport;
 	
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -150,6 +150,7 @@ public class VendingMachineCLI {
 		//add 1 to item number sold for sales report
 		inventory.addNumberSold(selection);
 		
+		
 		// handling transaction and logging transaction
 		int startingMoney = transaction.getCurrentMoney();
 		String stringStartingMoney = penniesToDollars(startingMoney);
@@ -160,6 +161,7 @@ public class VendingMachineCLI {
 		
 		purchaseLog.log(selectedItem.getName() + " " + selection + " " + stringStartingMoney +
 		" " + stringBalance);
+		
 		
 		// make snack sound
 		type = selectedItem.getType();
@@ -197,8 +199,6 @@ public class VendingMachineCLI {
 		return formatter.format(doubleDollars);
 	}
 		
-
-
 
 	public static void main(String[] args) {
 

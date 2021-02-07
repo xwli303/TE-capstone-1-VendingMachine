@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -87,6 +88,21 @@ public class Inventory {
 		numberSold ++;
 		item.setNumberRemaining(numberSold);
 		}
+	
+
+	public Map <String, Integer> getSalesNumber(){
+		Map <String, Integer> salesNumber = new HashMap<>();
+		Set<String> keys = snacksInMachine.keySet();
+		for(String eachSlot : keys) {
+			String snackName = snacksInMachine.get(eachSlot).getName();
+			int numberSales = snacksInMachine.get(eachSlot).getNumberSold();
+		
+			salesNumber.put(snackName, numberSales);
+		}
+		
+		
+		return salesNumber;
+	}
 	
 
 }
