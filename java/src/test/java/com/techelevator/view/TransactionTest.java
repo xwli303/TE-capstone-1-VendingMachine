@@ -20,7 +20,6 @@ public class TransactionTest {
 		assertEquals(expected, result);
 	}
 	
-	
 	public void testMoreMoney_insert4_shouldReturnException()  {
 		Transaction transaction = new Transaction();
 		int expected = 1000;
@@ -30,8 +29,6 @@ public class TransactionTest {
 		}
 	}
 		
-
-	
 //test return change 
 	
 	@Test
