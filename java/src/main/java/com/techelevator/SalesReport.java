@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,27 +16,15 @@ import java.util.TreeMap;
 
 
 public class SalesReport {
+	private int totalSales = 0;
 		
-//		Inventory inventory;
-//		Map<String, SnacksInSlot> snacksInMachine = inventory.snacksInMachine;
-		Map <String, Integer> salesNumber = new HashMap<>();
-		//Map<key, numberSold>
-		// constructor get keys from inventory
+	
+	Map <String, Integer> salesNumber = new HashMap<>();
 		public SalesReport (){
-			
+		
 		}
 		
 		
-//		public void getSalesNumber(){
-//			Set<String> keys = snacksInMachine.keySet();
-//			for(String key : keys) {
-//				String snackName = snacksInMachine.get(key).getName();
-////				int numberSales = 0;
-//				int numberSales = salesNumber.get(key);
-//			
-//			}
-//			
-//		}
 		
 		//create map with the keys and numberSold = 0;
 		// print sales report
@@ -52,16 +41,20 @@ public class SalesReport {
 				
 				
 				try (PrintWriter writer =
-					new PrintWriter (new FileOutputStream(salesReport.getAbsoluteFile(), appendMode))){
+					new PrintWriter (new FileOutputStream(salesReport.getAbsoluteFile(), !appendMode))){
 					
 					
 					Set<String> keys = inventory.getKeySet();
+					
 					for(String key : keys) {
 						String snackName = inventory.getSnackInslot(key).getName();
-;						int numberSold = salesNumber.get(key);
+						int numberSold = salesNumber.get(key);
+						int itemPrice = inventory.getSnackInslot(key).getPrice() * numberSold;
+						totalSales += itemPrice;
 					
 							writer.append(snackName + " " + numberSold + "\n");
 					}
+							writer.append("TOTAL SALES: " + penniesToDollars(totalSales));
 							writer.flush();
 							writer.close();
 			
@@ -85,7 +78,17 @@ public class SalesReport {
 				number ++;
 				salesNumber.put(slot, number);
 			}
+		
+		public String penniesToDollars(int pennies) {
+			NumberFormat formatter = NumberFormat.getCurrencyInstance();
+			double doubleDollars = (double)pennies/100.0;
+			return formatter.format(doubleDollars);
 		}
+		
+		
+		
+		
+	}
 		
 		// public void updateReport
 		// add 1 to numbersold in our sales<map>
