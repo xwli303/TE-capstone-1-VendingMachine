@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.text.NumberFormat;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -24,8 +25,7 @@ public class SalesReport {
 		
 		}
 		
-		
-		
+
 		//create map with the keys and numberSold = 0;
 		// print sales report
 		public void writeSalesReport (Inventory inventory) {
@@ -34,16 +34,14 @@ public class SalesReport {
 				File salesReport = new File("SalesReport.txt");
 				
 				if(!salesReport.exists()) {
-					System.out.println("file already exists");
+					System.out.println("FILE ALREADY EXISTS");
 				}
 				salesReport.createNewFile();
 				boolean appendMode = salesReport.exists() ? true : false;
 				
-				
 				try (PrintWriter writer =
 					new PrintWriter (new FileOutputStream(salesReport.getAbsoluteFile(), !appendMode))){
-					
-					
+			
 					Set<String> keys = inventory.getKeySet();
 					
 					for(String key : keys) {
@@ -52,9 +50,10 @@ public class SalesReport {
 						int itemPrice = inventory.getSnackInslot(key).getPrice() * numberSold;
 						totalSales += itemPrice;
 					
-							writer.append(snackName + " " + numberSold + "\n");
+							writer.printf("%-18s %-3s %-3s %n", snackName, " | ", numberSold );
 					}
-							writer.append("TOTAL SALES: " + penniesToDollars(totalSales));
+							writer.append("-------------------------\n");
+							writer.printf("%-19s %-10s", "TOTAL SALES: ", penniesToDollars(totalSales));
 							writer.flush();
 							writer.close();
 			
@@ -85,8 +84,7 @@ public class SalesReport {
 			return formatter.format(doubleDollars);
 		}
 		
-		
-		
+
 		
 	}
 		

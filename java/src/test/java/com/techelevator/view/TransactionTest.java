@@ -115,10 +115,41 @@ public class TransactionTest {
 	}
 	
 	@Test
+	public void testValueOfInput_TwoDollars_shouldReturn200() {
+		Transaction transaction = new Transaction();
+		int expected = 200;
+		int result = transaction.valueOfInput("$2");
+		assertEquals(expected,result);
+	}
+	
+	@Test
 	public void testValueOfInput_InvalidOneHundredDollars_shouldReturnZero() {
 		Transaction transaction = new Transaction();
 		int expected = 0;
 		int result = transaction.valueOfInput("$100");
+		assertEquals(expected,result);
+	}
+	
+	@Test
+	public void testValueOfInput_InvalidZero_shouldReturnZero() {
+		Transaction transaction = new Transaction();
+		int expected = 0;
+		int result = transaction.valueOfInput("$0");
+		assertEquals(expected,result);
+	}
+	@Test
+	public void testValueOfInput_InvalidInputLetters_shouldReturnZero() {
+		Transaction transaction = new Transaction();
+		int expected = 0;
+		int result = transaction.valueOfInput("wasd");
+		assertEquals(expected,result);
+	}
+	
+	@Test
+	public void testValueOfInput_InvalidInputNoDollarSign_shouldReturnZero() {
+		Transaction transaction = new Transaction();
+		int expected = 0;
+		int result = transaction.valueOfInput("10");
 		assertEquals(expected,result);
 	}
 	

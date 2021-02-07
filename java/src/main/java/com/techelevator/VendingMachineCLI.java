@@ -76,19 +76,19 @@ public class VendingMachineCLI {
 						//exit purchase menu
 						isSelect = false;
 						
-						
 					}
 			
-				}                     //END SELECT ITEMS MENU
+				}      //END SELECT ITEMS MENU
 				
 			}
 			else if (choice.contentEquals(MAIN_MENU_OPTIONS_EXIT)) {
 				isMain = false;
 				
-				System.out.println("bye bye");
+				System.out.println("THANK YOU, BYE BYE");
 			}
 			else if (choice.contentEquals(MAIN_MENU_SALES_REPORT)) {
 				salesReport.writeSalesReport(inventory);
+				System.out.println("SALES REPORT GENERATED");
 			}
 		}
 	}
@@ -97,7 +97,7 @@ public class VendingMachineCLI {
 	public void depositPrompt() {
 		int output;
 		System.out.println("You chose to Deposit Money");
-		System.out.println("How much? ( $1, $2, $5, $10 )");
+		System.out.println("How much? ($1, $2, $5, $10)");
 		String amountDeposited = userInput.nextLine();
 		int deposit = transaction.valueOfInput(amountDeposited);
 			
@@ -107,8 +107,7 @@ public class VendingMachineCLI {
 			
 			System.out.println("Money in machine: " + balanceString);
 			
-			purchaseLog.log("FEED MONEY: " + penniesToDollars(deposit) + 
-					" " + balanceString);
+			purchaseLog.log("FEED MONEY: " + penniesToDollars(deposit) + "  " + balanceString);
 			
 		} catch (TransactionException e) {
 			// TODO Auto-generated catch block
@@ -165,8 +164,8 @@ public class VendingMachineCLI {
 		int balance = transaction.getCurrentMoney();
 		String stringBalance = penniesToDollars(balance);
 		
-		purchaseLog.log(selectedItem.getName() + " " + selection + " " + stringStartingMoney +
-		" " + stringBalance);
+		purchaseLog.log(selectedItem.getName() + "  " + selection + "  " + stringStartingMoney +
+		"  " + stringBalance);
 		
 		
 		// make snack sound
@@ -178,7 +177,7 @@ public class VendingMachineCLI {
 	public String changePrompt () {
 		
 		int balance = transaction.getCurrentMoney();
-		purchaseLog.log("GIVE CHANGE: " + penniesToDollars(balance) + " 0.00" );
+		purchaseLog.log("GIVE CHANGE: " + penniesToDollars(balance) + "  0.00" );
 
 		return transaction.returnChange(balance);	
 	}
