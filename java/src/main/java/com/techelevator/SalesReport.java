@@ -16,15 +16,30 @@ import java.util.TreeMap;
 
 public class SalesReport {
 		
-//		Map <String, SnacksInSlot> snacks = new TreeMap<>();
-		
-		Inventory inventory = new Inventory();
-		Map <String, Integer> salesNumber = inventory.getSalesNumber();
+//		Inventory inventory;
+//		Map<String, SnacksInSlot> snacksInMachine = inventory.snacksInMachine;
+		Map <String, Integer> salesNumber = new HashMap<>();
 		//Map<key, numberSold>
 		// constructor get keys from inventory
+		public SalesReport (){
+			
+		}
+		
+		
+//		public void getSalesNumber(){
+//			Set<String> keys = snacksInMachine.keySet();
+//			for(String key : keys) {
+//				String snackName = snacksInMachine.get(key).getName();
+////				int numberSales = 0;
+//				int numberSales = salesNumber.get(key);
+//			
+//			}
+//			
+//		}
+		
 		//create map with the keys and numberSold = 0;
 		// print sales report
-		public void sales () {
+		public void writeSalesReport (Inventory inventory) {
 			
 			try {
 				File salesReport = new File("SalesReport.txt");
@@ -38,11 +53,17 @@ public class SalesReport {
 				
 				try (PrintWriter writer =
 					new PrintWriter (new FileOutputStream(salesReport.getAbsoluteFile(), appendMode))){
-						for (Map.Entry<String, Integer> entry : salesNumber.entrySet()) {
-							writer.write(entry.getKey() + " " + entry.getValue() + "\n");
+					
+					
+					Set<String> keys = inventory.getKeySet();
+					for(String key : keys) {
+						String snackName = inventory.getSnackInslot(key).getName();
+;						int numberSold = salesNumber.get(key);
+					
+							writer.append(snackName + " " + numberSold + "\n");
+					}
 							writer.flush();
 							writer.close();
-						}
 			
 				} catch (FileNotFoundException e) {
 					System.out.println(e.getMessage());
@@ -52,9 +73,23 @@ public class SalesReport {
 			}
 		}
 		
+		public void initializeSalesNumber (Inventory inventory) {
+			Set<String> keys = inventory.getKeySet();
+			for(String key : keys) {
+				salesNumber.put(key, 0);
+			}
+		}
+		
+		public void updateSalesReport (Inventory inventory, String slot) {
+				int number = salesNumber.get(slot);
+				number ++;
+				salesNumber.put(slot, number);
+			}
+		}
+		
 		// public void updateReport
 		// add 1 to numbersold in our sales<map>
 		
 		//constructor open existing file and populate data structure
 
-}
+

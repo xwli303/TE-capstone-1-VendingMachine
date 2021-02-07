@@ -29,7 +29,7 @@ public class VendingMachineCLI {
 	Scanner userInput = new Scanner (System.in);
 	private Log purchaseLog = new Log();
 	private NumberFormat formatter = NumberFormat.getCurrencyInstance();
-	private SalesReport salesReport;
+	private SalesReport salesReport = new SalesReport();
 	
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -42,6 +42,7 @@ public class VendingMachineCLI {
 
 	public void run() {
 		inventory.fillInventory();
+		salesReport.initializeSalesNumber(inventory);
 		
 		while (isMain) {
 			isSelect = true;  //reset Purchase Menu
@@ -81,7 +82,7 @@ public class VendingMachineCLI {
 			}
 			else if (choice.contentEquals(MAIN_MENU_OPTIONS_EXIT)) {
 				isMain = false;
-				//write sales report
+				salesReport.writeSalesReport(inventory);
 				System.out.println("bye bye");
 			}
 		}
@@ -149,8 +150,7 @@ public class VendingMachineCLI {
 		inventory.removeSnackFromSlot(selection);
 		
 		//add 1 to item number sold for sales report
-		//***inventory.addNumberSold(selection);
-		// sales.updateReport(selection);
+		salesReport.updateSalesReport(inventory, selection);
 		
 		// handling transaction and logging transaction
 		int startingMoney = transaction.getCurrentMoney();

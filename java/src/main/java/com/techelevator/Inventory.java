@@ -23,6 +23,10 @@ public class Inventory {
 		return snacksInMachine.get(key);
 	}
 	
+	public Set<String> getKeySet(){
+		return snacksInMachine.keySet();
+	}
+	
 	public void removeSnackFromSlot(String key) {
 		SnacksInSlot item = snacksInMachine.get(key);
 		int numberLeft = item.getNumberRemaining();
