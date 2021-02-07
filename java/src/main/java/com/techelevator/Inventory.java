@@ -88,7 +88,6 @@ public class Inventory {
 		numberSold ++;
 		item.setNumberRemaining(numberSold);
 		}
-	
 
 	public Map <String, Integer> getSalesNumber(){
 		Map <String, Integer> salesNumber = new HashMap<>();
