@@ -20,7 +20,10 @@ public class SalesReport {
 		
 		Inventory inventory = new Inventory();
 		Map <String, Integer> salesNumber = inventory.getSalesNumber();
-		
+		//Map<key, numberSold>
+		// constructor get keys from inventory
+		//create map with the keys and numberSold = 0;
+		// print sales report
 		public void sales () {
 			
 			try {
@@ -48,5 +51,10 @@ public class SalesReport {
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		// public void updateReport
+		// add 1 to numbersold in our sales<map>
+		
+		//constructor open existing file and populate data structure
 
 }

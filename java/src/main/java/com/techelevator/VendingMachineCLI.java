@@ -81,6 +81,7 @@ public class VendingMachineCLI {
 			}
 			else if (choice.contentEquals(MAIN_MENU_OPTIONS_EXIT)) {
 				isMain = false;
+				//write sales report
 				System.out.println("bye bye");
 			}
 		}
@@ -144,12 +145,12 @@ public class VendingMachineCLI {
 			return "INSUFFICIENT FUNDS";	
 			} 
 		
-		//customer receives snacks from machine
+		//customer receives snacks from machine and sales report updated
 		inventory.removeSnackFromSlot(selection);
 		
 		//add 1 to item number sold for sales report
-		inventory.addNumberSold(selection);
-		
+		//***inventory.addNumberSold(selection);
+		// sales.updateReport(selection);
 		
 		// handling transaction and logging transaction
 		int startingMoney = transaction.getCurrentMoney();

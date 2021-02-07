@@ -61,39 +61,8 @@ public class Transaction {
 		} 
 		return value;
 	}
-	/*
-	public void manageTransaction(Inventory inventory, String YorN) throws TransactionException {
-		boolean continueDeposit = true; 
-		while(continueDeposit) {
-			Scanner userInput = new Scanner (System.in);
-			
-			if (YorN.equals("N") || YorN.equals("n")){
-				continueDeposit = false;
-				}
-		}
-				System.out.println("Current money is: " + currentMoney);
-				this.selectItem(inventory);
-	}*/
-/*
-	public void selectItem (Inventory inventory) throws TransactionException {
-		inventory.displayChoices();
-		System.out.println("Please input the slot number: ");
 
-		Scanner userInput = new Scanner (System.in);
-		String slotNum = userInput.nextLine();
-		
-		SnacksInSlot snack = inventory.getSnackInslot(slotNum);
-		int snackPrice = inventory.snacksInMachine.get(slotNum).getPrice();
-		
-		if (currentMoney - snackPrice < 0) {
-			throw new TransactionException("Insufficient funds");
-		} 
-		
-		currentMoney -= snackPrice;
-		//print out new balance 
-		System.out.println("You got " + snack.getName());
-		}
-		*/
+
 	public boolean checkSufficientFund (SnacksInSlot snack) {
 		int snackPrice = snack.getPrice();
 		if (currentMoney - snackPrice >= 0) {

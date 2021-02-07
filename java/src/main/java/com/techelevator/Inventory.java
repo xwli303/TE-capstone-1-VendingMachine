@@ -86,7 +86,7 @@ public class Inventory {
 		SnacksInSlot item = snacksInMachine.get(key);
 		int numberSold = item.getNumberSold();
 		numberSold ++;
-		item.setNumberRemaining(numberSold);
+		//item.setNumberRemaining(numberSold);
 		}
 
 	public Map <String, Integer> getSalesNumber(){
