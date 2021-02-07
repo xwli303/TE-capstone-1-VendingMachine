@@ -6,6 +6,7 @@ public class SnacksInSlot {
 	private String slotNumber;
 	private String type; //chips, candy, gum, drink
 	private int numberRemaining; //derived?
+	private int numberSold; //for sales report
 	
 	private static final int startingQuantity = 5;      //remove if not needed
 	
@@ -36,6 +37,9 @@ public class SnacksInSlot {
 	public void setNumberRemaining (int numberRemaining) {
 		this.numberRemaining = numberRemaining;
 	}
+	public void setNumberSold (int numberSold) {
+		this.numberSold = numberSold;
+	}
 	
 	//getters
 	public String getName () {
@@ -52,5 +56,8 @@ public class SnacksInSlot {
 	}
 	public int getNumberRemaining () {
 		return numberRemaining;
+	}
+	public int getNumberSold() {
+		return numberSold;
 	}
 }

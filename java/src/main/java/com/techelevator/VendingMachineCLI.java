@@ -147,6 +147,9 @@ public class VendingMachineCLI {
 		//customer receives snacks from machine
 		inventory.removeSnackFromSlot(selection);
 		
+		//add 1 to item number sold for sales report
+		inventory.addNumberSold(selection);
+		
 		// handling transaction and logging transaction
 		int startingMoney = transaction.getCurrentMoney();
 		String stringStartingMoney = penniesToDollars(startingMoney);

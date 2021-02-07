@@ -80,6 +80,14 @@ public class Inventory {
 	}
 	
 	
+	//sales report
+	public void addNumberSold(String key) {
+		SnacksInSlot item = snacksInMachine.get(key);
+		int numberSold = item.getNumberSold();
+		numberSold ++;
+		item.setNumberRemaining(numberSold);
+		}
+	
 
 }
  

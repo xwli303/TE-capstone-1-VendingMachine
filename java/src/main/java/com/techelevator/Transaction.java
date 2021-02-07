@@ -103,7 +103,7 @@ public class Transaction {
 		}
 	}
 	
-	String returnChange(int amount) {
+	public String returnChange(int amount) {
 		int [] coins = {0, 0, 0};
 		
 		int quarters = amount / VALUE_OF_QUARTER;
@@ -137,6 +137,7 @@ public class Transaction {
 		return change;	
 		
 	}
+	
 	
 	}
 	
