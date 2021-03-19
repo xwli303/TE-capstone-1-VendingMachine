@@ -24,7 +24,6 @@ public class SalesReport {
 		public SalesReport (){
 		
 		}
-		
 
 		//create map with the keys and numberSold = 0;
 		// print sales report
